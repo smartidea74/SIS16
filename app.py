@@ -222,10 +222,11 @@ def render_docx_form(result_fields):
         "WANTS_TAX_IV_TRIM": checkbox_marked(not st.session_state.get("no_tax_iv_trim", False)) if doc_date.month in [10,11,12] else "☐ да    ☐ не",
         "MAX_INSURED": checkbox_marked(st.session_state.get("max_insured", False)),
         "RETIRED": checkbox_marked(st.session_state.get("retired", False)),
-        "WANTS_INSURANCE": checkbox_marked(st.session_state.get("retired_wants_insurance", False)) if st.session_state.get("retired", False) else "☐ да    ☐ не",
+        "WANTS_INSURANCE": checkbox_marked(st.session_state.get("retired_wants_insurance", False)) if st.session_state.get("retired", False) else "",
         "INSURED_ELSEWHERE": checkbox_marked(st.session_state.get("insured_elsewhere", False)),
         "NET_AMOUNT_WORDS": net_amount_words,
         "QUARTER_CHECKBOXES": format_quarter_checkboxes(doc_date.month),
+        "INSURANCE_TOTAL": f"{result_fields.get('PENSION_CONTRIBUTION', 0) + result_fields.get('DZPO_CONTRIBUTION', 0) + result_fields.get('HEALTH_CONTRIBUTION', 0):.2f}",
         "MONTH_AND_YEAR": f"{doc_date.strftime('%m.%Y')}"
     }
     if result_fields:
