@@ -312,12 +312,3 @@ if __name__ == "__main__":
     main()
 
 
-def get_quarter_text(month: int) -> str:
-    if month in [1, 2, 3]:
-        return "І-во тр."
-    elif month in [4, 5, 6]:
-        return "ІІ-ро тр."
-    elif month in [7, 8, 9]:
-        return "ІІІ-то тр."
-    else:
-        return "ІV-то тр."
