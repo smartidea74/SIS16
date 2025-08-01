@@ -225,8 +225,7 @@ def render_docx_form(result_fields):
         "INSURED_ELSEWHERE": checkbox_marked(st.session_state.get("insured_elsewhere", False)),
         "NET_AMOUNT_WORDS": net_amount_words,
         "QUARTER_CHECKBOXES": format_quarter_checkboxes(doc_date.month),
-        "QUARTER_TEXT": get_quarter_text(doc_date.month),
-        "INSURANCE_TOTAL": f"{result_fields.get('PENSION_CONTRIBUTION', 0) + result_fields.get('DZPO_CONTRIBUTION', 0) + result_fields.get('HEALTH_CONTRIBUTION', 0):.2f}",
+                "INSURANCE_TOTAL": f"{result_fields.get('PENSION_CONTRIBUTION', 0) + result_fields.get('DZPO_CONTRIBUTION', 0) + result_fields.get('HEALTH_CONTRIBUTION', 0):.2f}",
         "MONTH_AND_YEAR": f"{doc_date.strftime('%m.%Y')}"
     }
     if result_fields:
