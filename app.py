@@ -205,8 +205,7 @@ def render_docx_form(result_fields):
     person_egn = st.text_input("ЕГН")
     contract_number = st.text_input("Номер на договора")
     contract_date = st.date_input("Дата на договора", value=date.today())
-    quarter = st.selectbox("Тримесечие", ["І-во тр.", "ІІ-ро тр.", "ІІІ-то тр.", "ІV-то тр."])
-    doc_date = st.session_state.get("doc_date", date.today())
+    quarter =     doc_date = st.session_state.get("doc_date", date.today())
     def checkbox_marked(val): return "☑ да    ☐ не" if val else "☐ да    ☑ не"
     net_amount_words = num_to_words_bg(result_fields.get("NET_AMOUNT", 0))
     filled_data = {
@@ -226,6 +225,7 @@ def render_docx_form(result_fields):
         "INSURED_ELSEWHERE": checkbox_marked(st.session_state.get("insured_elsewhere", False)),
         "NET_AMOUNT_WORDS": net_amount_words,
         "QUARTER_CHECKBOXES": format_quarter_checkboxes(doc_date.month),
+        "QUARTER_TEXT": get_quarter_text(doc_date.month),
         "INSURANCE_TOTAL": f"{result_fields.get('PENSION_CONTRIBUTION', 0) + result_fields.get('DZPO_CONTRIBUTION', 0) + result_fields.get('HEALTH_CONTRIBUTION', 0):.2f}",
         "MONTH_AND_YEAR": f"{doc_date.strftime('%m.%Y')}"
     }
@@ -310,3 +310,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def get_quarter_text(month: int) -> str:
+    if month in [1, 2, 3]:
+        return "І-во тр."
+    elif month in [4, 5, 6]:
+        return "ІІ-ро тр."
+    elif month in [7, 8, 9]:
+        return "ІІІ-то тр."
+    else:
+        return "ІV-то тр."
